@@ -1,4 +1,5 @@
-variable "tag_name" {}
+variable "name_tag" {}
+
 # AWS
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
