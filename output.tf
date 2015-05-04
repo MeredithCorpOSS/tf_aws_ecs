@@ -1,5 +1,5 @@
 output "elb_hostname" {
-  value = "${aws_elb.demo.dns_name}"
+  value = "${aws_elb.main.dns_name}"
 }
 
 # -*- mode: ruby -*-
