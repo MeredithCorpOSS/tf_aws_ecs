@@ -67,7 +67,7 @@ DEFINITION
 
 ## IAM roles
 
-These roles need to be setup to let ECS work properly. Use either AWS CLI & `aws iam create-role` or wait until [IAM support]() lands in Terraform codebase.
+These roles need to be setup to let ECS work properly. Use either AWS CLI & `aws iam create-role` or wait until [IAM support](https://github.com/hashicorp/terraform/pull/939) lands in Terraform codebase.
 
 ### IAM ECS instance profile role
 
