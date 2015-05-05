@@ -1,5 +1,7 @@
 # AWS ECS Terraform Module
 
+There're no ECS resources in TF yet, until https://github.com/hashicorp/terraform/pull/1803 is merged, this is purely for demoing the functionality coming via that PR.
+
 ## This is for demo purposes only
 
 This module is intended for **demo purposes only**, it has a lot limitations making it useless for any live environment:
