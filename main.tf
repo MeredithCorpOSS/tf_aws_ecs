@@ -170,7 +170,7 @@ resource "aws_ecs_cluster" "main" {
 resource "aws_ecs_service" "main" {
   name = "tf-ecs-service"
   cluster = "${aws_ecs_cluster.main.id}"
-  task_definition = "${aws_ecs_task_definition.main.id}"
+  task_definition = "${aws_ecs_task_definition.main.arn}"
   desired_count = "${var.service_desired_count}"
   iam_role = "${var.aws_ecs_iam_service_role}"
 
