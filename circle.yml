@@ -1,0 +1,10 @@
+dependencies:
+  override:
+    - curl -L -o terraform_linux_amd64.zip https://dl.bintray.com/mitchellh/terraform/terraform_0.5.0_linux_amd64.zip
+    - unzip -d bin/ terraform_linux_amd64.zip
+    - export PATH=./bin:$PATH
+    - terraform --version
+
+test:
+  override:
+    - terraform plan
