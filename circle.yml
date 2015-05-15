@@ -10,4 +10,4 @@ dependencies:
 
 test:
   override:
-    - terraform plan
+    - terraform plan -var-file=terraform.fixtures.tfvars
