@@ -1,11 +1,14 @@
 machine:
   environment:
-    PATH: ./bin:$PATH
+    GOPATH: /home/ubuntu/.go_workspace
+    PATH: $GOPATH/bin:$PATH
+    HASHICORP_PATH: $GOPATH/src/github.com/hashicorp
 
 dependencies:
   override:
-    - curl -L -o terraform_linux_amd64.zip https://dl.bintray.com/mitchellh/terraform/terraform_0.5.0_linux_amd64.zip
-    - unzip -d bin/ terraform_linux_amd64.zip
+    - mkdir -p $HASHICORP_PATH
+    - git clone https://github.com/TimeIncOSS/terraform.git $HASHICORP_PATH/terraform
+    - cd $HASHICORP_PATH/terraform && git checkout ecs && make updatedeps && make dev
     - terraform --version
 
 test:
