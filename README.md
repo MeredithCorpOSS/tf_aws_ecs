@@ -35,6 +35,7 @@ module "ecs" {
   # ECS
   cluster_name = "ecs-demo"
   definition_family_name = "ghost"
+  service_name = "ghost_service"
   service_desired_count = 3
   service_port_number = 2368
   instance_port = 8080

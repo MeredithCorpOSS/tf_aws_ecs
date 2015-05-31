@@ -36,6 +36,7 @@ variable "cluster_name" {}
 variable "definition_family_name" {}
 variable "container_definitions" {}
 variable "container_name" {}
+variable "service_name" {}
 variable "service_desired_count" {}
 variable "service_port_number" {}
 variable "instance_port" {}
