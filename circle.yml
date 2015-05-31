@@ -7,7 +7,7 @@ machine:
 dependencies:
   override:
     - mkdir -p $HASHICORP_PATH
-    - git clone https://github.com/TimeIncOSS/terraform.git $HASHICORP_PATH/terraform
+    - stat $HASHICORP_PATH/terraform >/dev/null 2>&1 || git clone https://github.com/TimeIncOSS/terraform.git $HASHICORP_PATH/terraform
     - cd $HASHICORP_PATH/terraform && git checkout ecs && make updatedeps && make dev
     - terraform --version
 
