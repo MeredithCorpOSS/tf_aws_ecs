@@ -113,11 +113,103 @@ resource "aws_security_group" "instance" {
   }
 }
 
+# IAM
+resource "aws_iam_instance_profile" "ecs" {
+    name = "EcsInstance"
+    roles = ["${aws_iam_role.ecs_instance.name}"]
+}
+
+resource "aws_iam_role" "ecs_instance" {
+    name = "EcsInstance"
+    path = "/"
+    assume_role_policy = <<EOF
+{
+    "Version": "2008-10-17",
+    "Statement": [
+        {
+            "Action": "sts:AssumeRole",
+            "Principal": {"AWS": "*"},
+            "Effect": "Allow",
+            "Sid": ""
+        }
+    ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy" "ecs_instance" {
+    name = "EcsInstance"
+    role = "${aws_iam_role.ecs_instance.name}"
+    policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ecs:CreateCluster",
+        "ecs:DeregisterContainerInstance",
+        "ecs:DiscoverPollEndpoint",
+        "ecs:Poll",
+        "ecs:RegisterContainerInstance",
+        "ecs:Submit*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}
+EOF
+} 
+
+resource "aws_iam_role" "ecs_service" {
+    name = "EcsService"
+    assume_role_policy = <<EOF
+{
+    "Version": "2008-10-17",
+    "Statement": [
+        {
+            "Action": "sts:AssumeRole",
+            "Principal": {"AWS": "*"},
+            "Effect": "Allow",
+            "Sid": ""
+        }
+    ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy" "ecs_service" {
+    name = "EcsService"
+    role = "${aws_iam_role.ecs_service.name}"
+    policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "elasticloadbalancing:Describe*",
+        "elasticloadbalancing:DeregisterInstancesFromLoadBalancer",
+        "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
+        "ec2:Describe*",
+        "ec2:AuthorizeSecurityGroupIngress"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}
+EOF
+} 
+
 # EC2
 resource "aws_launch_configuration" "main" {
   image_id = "${var.aws_ecs_ami_id}"
   instance_type = "${var.aws_instance_type}"
-  iam_instance_profile = "${var.aws_ecs_iam_instance_profile}"
+  iam_instance_profile = "${aws_iam_instance_profile.ecs.arn}"
   security_groups = ["${aws_security_group.instance.id}"]
   key_name = "${var.aws_instance_key_name}"
   associate_public_ip_address = true
@@ -172,7 +264,7 @@ resource "aws_ecs_service" "main" {
   cluster = "${aws_ecs_cluster.main.id}"
   task_definition = "${aws_ecs_task_definition.main.arn}"
   desired_count = "${var.service_desired_count}"
-  iam_role = "${var.aws_ecs_iam_service_role}"
+  iam_role = "${aws_iam_role.ecs_service.arn}"
 
   load_balancer {
     elb_name = "${aws_elb.main.id}"

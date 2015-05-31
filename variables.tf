@@ -40,8 +40,4 @@ variable "service_desired_count" {}
 variable "service_port_number" {}
 variable "instance_port" {}
 
-# IAM
-variable "aws_ecs_iam_instance_profile" {}
-variable "aws_ecs_iam_service_role" {}
-
 # -*- mode: ruby -*-

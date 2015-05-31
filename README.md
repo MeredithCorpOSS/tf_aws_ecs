@@ -56,64 +56,9 @@ module "ecs" {
   }
 ]
 DEFINITION
-
-  # IAM - see below
-  aws_ecs_iam_instance_profile = "arn:aws:iam::01234567890:instance-profile/ecsInstanceRole"
-  aws_ecs_iam_service_role = "arn:aws:iam::01234567890:role/ecsServiceRole"
 }
 ```
 
 ## Output
 
  - `elb_hostname`
-
-## IAM roles
-
-These roles need to be setup to let ECS work properly. Use either AWS CLI & `aws iam create-role` or wait until [IAM support](https://github.com/hashicorp/terraform/pull/939) lands in Terraform codebase.
-
-### IAM ECS instance profile role
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "ecs:CreateCluster",
-        "ecs:DeregisterContainerInstance",
-        "ecs:DiscoverPollEndpoint",
-        "ecs:Poll",
-        "ecs:RegisterContainerInstance",
-        "ecs:Submit*"
-      ],
-      "Resource": [
-        "*"
-      ]
-    }
-  ]
-}
-```
-
-### IAM ECS service role (for ELB de/registration)
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "elasticloadbalancing:Describe*",
-        "elasticloadbalancing:DeregisterInstancesFromLoadBalancer",
-        "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
-        "ec2:Describe*",
-        "ec2:AuthorizeSecurityGroupIngress"
-      ],
-      "Resource": [
-        "*"
-      ]
-    }
-  ]
-}
-```
