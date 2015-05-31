@@ -1,7 +1,7 @@
 aws_az_name = ""
 name_tag = ""
 container_definitions = ""
-cluster_name = ""
+cluster_name = "yada_yada"
 client_cidr = ""
 aws_instance_key_name = ""
 desired_asg_capacity = 3
