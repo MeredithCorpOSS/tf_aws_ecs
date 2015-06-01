@@ -10,6 +10,7 @@ aws_access_key = ""
 aws_secret_key = ""
 definition_family_name = ""
 instance_port = 80
+service_name = "yada"
 service_desired_count = 1
 aws_region = "us-east-1"
 service_port_number = 80
