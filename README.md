@@ -1,6 +1,8 @@
 # AWS ECS Terraform Module [![Circle CI](https://circleci.com/gh/TimeIncOSS/tf_aws_ecs/tree/master.svg?style=svg)](https://circleci.com/gh/TimeIncOSS/tf_aws_ecs/tree/master)
 
-There're no ECS resources in TF yet, until https://github.com/hashicorp/terraform/pull/1803 is merged, this is purely for demoing the functionality coming via that PR.
+## Requirements
+
+ - Terraform `0.6.0+`
 
 ## This is for demo purposes only
 
