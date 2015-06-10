@@ -9,8 +9,8 @@ dependencies:
     - rm -rf $GOPATH
   override:
     - mkdir -p $HASHICORP_PATH
-    - git clone https://github.com/TimeIncOSS/terraform.git $HASHICORP_PATH/terraform
-    - cd $HASHICORP_PATH/terraform && git checkout ecs && make updatedeps && make dev
+    - git clone https://github.com/hashicorp/terraform.git $HASHICORP_PATH/terraform
+    - cd $HASHICORP_PATH/terraform && make updatedeps && make dev
     - terraform --version
 
 test:
