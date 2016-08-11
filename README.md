@@ -25,8 +25,6 @@ module "ecs" {
   client_cidr = ".../32" # Your CIDR (Your IP/32)
 
   # AWS
-  aws_access_key = "${var.aws_access_key}"
-  aws_secret_key = "${var.aws_secret_key}"
   aws_region = "us-west-2"
   aws_az_name = "us-west-2c"
 
