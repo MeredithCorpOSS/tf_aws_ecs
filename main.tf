@@ -161,7 +161,7 @@ resource "aws_iam_role_policy" "ecs_instance" {
   ]
 }
 EOF
-} 
+}
 
 resource "aws_iam_role" "ecs_service" {
     name = "EcsService"
@@ -203,7 +203,7 @@ resource "aws_iam_role_policy" "ecs_service" {
   ]
 }
 EOF
-} 
+}
 
 # EC2
 resource "aws_launch_configuration" "main" {
@@ -272,5 +272,3 @@ resource "aws_ecs_service" "main" {
     container_port = "${var.service_port_number}"
   }
 }
-
-# -*- mode: ruby -*-
